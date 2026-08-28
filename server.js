@@ -33,7 +33,7 @@ app.post('/webhook', (req, res) => {
     res.status(200).send('EVENT_RECEIVED');
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, '0.0.0.0', () => {
     console.log(`Server is listening on port ${PORT}`);
 });
