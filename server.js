@@ -14,7 +14,6 @@ app.get('/webhook', (req, res) => {
     const token = req.query['hub.verify_token'];
     const challenge = req.query['hub.challenge'];
 
-    // الرمز الذي أضفته في متغيرات البيئة على Railway وفي فيسبوك
     const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
 
     if (mode && token) {
