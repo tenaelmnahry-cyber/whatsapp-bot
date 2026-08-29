@@ -8,7 +8,7 @@ app.get('/', (req, res) => {
     res.send('Bot is running!');
 });
 
-// مسار التحقق واستقبال الـ Webhook
+// مسار التحقق واستقبال الـ Webhook الخاص بفيسبوك فقط
 app.get('/webhook', (req, res) => {
     const mode = req.query['hub.mode'];
     const token = req.query['hub.verify_token'];
@@ -16,15 +16,12 @@ app.get('/webhook', (req, res) => {
 
     const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
 
-    if (mode && token) {
-        if (mode === 'subscribe' && token === VERIFY_TOKEN) {
-            console.log('WEBHOOK_VERIFIED');
-            return res.status(200).send(challenge);
-        } else {
-            return res.sendStatus(403);
-        }
+    if (mode === 'subscribe' && token === VERIFY_TOKEN) {
+        console.log('WEBHOOK_VERIFIED');
+        return res.status(200).send(challenge);
+    } else {
+        return res.sendStatus(403);
     }
-    res.send('Webhook is working!');
 });
 
 app.post('/webhook', (req, res) => {
